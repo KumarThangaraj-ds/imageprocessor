@@ -84,11 +84,12 @@ def GetEncodedLocalFile ():
 @app.post("/answer-image")
 async def answer_image(req: ImageRequest):
     image_data = req.image_base64
+    encoded = image_data.encode("utf-8")
+    decoded = base64.b64decode(encoded)
     question = req.question
-    image_data = GetEncodedLocalFile ()
-    base64_text = image_data.decode("utf-8")
+    #image_data = GetEncodedLocalFile ()
     # send image_data + question to your multimodal model here
     answer = "4089.35"
     #gptres = GetGPTResponse (image_data, question)
-    answer = GetGeminiResponse (base64_text, question)
+    answer = GetGeminiResponse (decoded, question)
     return {"answer": str(answer)}
