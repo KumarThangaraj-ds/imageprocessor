@@ -48,7 +48,7 @@ def GetGeminiResponse (image_data, question):
     print ("before Gemini Call")
     try:
         response = client.models.generate_content(
-            model='gemini-3.5-flash',
+            model='gemini-3.1-flash-lite',
             contents=[
                 image_part, 
                 question + "give me only the value in the response",
