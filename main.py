@@ -51,7 +51,7 @@ def GetGeminiResponse (image_data, question):
             model='gemini-3.1-flash-lite',
             contents=[
                 image_part, 
-                question + "give me only the value in the response and in case of number or amount remove the mantissa separator",
+                question + "give me only the value in the response and in case of number or amount remove the mantissa separator and decimal separator should not be missed",
             ]
         )
         return response.text
@@ -59,7 +59,7 @@ def GetGeminiResponse (image_data, question):
         if e.code == 429:
             return ("Rate limit reached. Back off and retry.")
         if e.code == 400:
-            return ("Invalid Argument")
+            return (f"Invalid Argument code:{e.code}, message:{e.message}")
         if e.code == 403:
             return ("Forbidden request")
         if e.code == 404:
