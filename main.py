@@ -96,4 +96,5 @@ async def answer_image(req: ImageRequest):
     answer = "4089.35"
     #gptres = GetGPTResponse (image_data, question)
     answer = GetGeminiResponse (decoded, question)
+    print (f"answer: {answer}")
     return {"answer": str(answer)}
