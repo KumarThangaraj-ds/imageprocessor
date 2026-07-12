@@ -84,6 +84,8 @@ def GetEncodedLocalFile ():
 @app.post("/answer-image")
 async def answer_image(req: ImageRequest):
     image_data = req.image_base64
+    print (req.question)
+    print (image_data)
     if image_data.startswith("data:"):
         image_data = image_data.split(",", 1)[1]
     encoded = image_data.encode("utf-8")
