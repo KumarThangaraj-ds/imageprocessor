@@ -48,10 +48,10 @@ def GetGeminiResponse (image_data, question):
     print ("before Gemini Call")
     try:
         response = client.models.generate_content(
-            model='gemini-3.1-flash-lite',
+            model='gemini-3.5-flash',
             contents=[
                 image_part, 
-                question + "give me only the value in the response and in case of number or amount remove the mantissa separator and decimal separator should not be missed",
+                question + "give me only the value in the response and in case of number or amount remove the mantissa separator and decimal separator should not be missed. query can ask the category for highest amount, in that case category name to be shared not amount. similarly highest percentage of the category can be asked, dont give percentage, give name of the item",
             ]
         )
         return response.text
