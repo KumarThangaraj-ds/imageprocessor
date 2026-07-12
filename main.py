@@ -51,7 +51,7 @@ def GetGeminiResponse (image_data, question):
             model='gemini-3.1-flash-lite',
             contents=[
                 image_part, 
-                question + "give me only the value in the response",
+                question + "give me only the value in the response and in case of number or amount remove the mantissa separator",
             ]
         )
         return response.text
@@ -84,6 +84,8 @@ def GetEncodedLocalFile ():
 @app.post("/answer-image")
 async def answer_image(req: ImageRequest):
     image_data = req.image_base64
+    if image_data.startswith("data:"):
+        image_data = image_data.split(",", 1)[1]
     encoded = image_data.encode("utf-8")
     decoded = base64.b64decode(encoded)
     question = req.question
